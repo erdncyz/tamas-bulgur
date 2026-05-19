@@ -69,7 +69,7 @@ export default function Contact() {
                   <h4 className="font-serif font-bold text-xl text-brand-brown dark:text-white mb-1 uppercase tracking-wider">
                     {language === "tr" ? "E-Posta" : "Email"}
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-400">kemalkilinc0244@gmail.com</p>
+                  <p className="text-gray-600 dark:text-gray-400">tamasbulgur@gmail.com</p>
                 </div>
               </div>
             </div>
