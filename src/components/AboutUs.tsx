@@ -19,10 +19,9 @@ export default function AboutUs() {
           >
             <div className="aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop"
+                src="/tamas.jpg"
                 alt={language === "tr" ? "Geleneksel Üretim" : "Traditional Production"}
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </div>
             {/* Floating Experience Badge */}
