@@ -24,6 +24,11 @@ export default function Hero() {
       altEn: "Grain products",
     },
     {
+      src: "/4.jpeg",
+      altTr: "Bulgur üretim detayı",
+      altEn: "Bulgur production detail",
+    },
+    {
       src: "/9.jpeg",
       altTr: "Geleneksel bulgur üretim sahnesi",
       altEn: "Traditional bulgur production scene",
