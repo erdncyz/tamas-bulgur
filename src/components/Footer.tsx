@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="flex items-center justify-center md:justify-start space-x-2">
             <div className="bg-white dark:bg-brand-green text-brand-brown dark:text-white p-1 rounded font-serif font-bold text-lg tracking-tighter transition-colors duration-300">
-              TAMAS
+              TAMAŞ
             </div>
             <span className="font-serif text-xl font-bold tracking-tight text-white">
               BULGUR
