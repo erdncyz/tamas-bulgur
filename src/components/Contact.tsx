@@ -87,9 +87,9 @@ export default function Contact() {
                 href="https://www.instagram.com/tamasbulgur/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 group"
+                className="inline-flex items-center gap-6 group"
               >
-                <div className="bg-white/85 dark:bg-[#243244] p-3 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
+                <div className="bg-white/85 dark:bg-[#243244] p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
                   <Instagram size={22} />
                 </div>
                 <div>
