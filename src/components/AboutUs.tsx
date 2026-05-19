@@ -19,7 +19,7 @@ export default function AboutUs() {
           >
             <div className="aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="/tamas.jpg"
+                src="/tamas.png"
                 alt={language === "tr" ? "Geleneksel Üretim" : "Traditional Production"}
                 className="w-full h-full object-cover"
               />
