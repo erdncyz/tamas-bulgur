@@ -32,10 +32,10 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <div className="bg-brand-brown dark:bg-brand-green text-white p-2 rounded-lg font-serif font-bold text-xl tracking-tighter transition-colors duration-300">
-              TAMAS
+            <div className="bg-brand-brown dark:bg-brand-green text-white p-2 rounded-lg font-serif font-bold text-lg sm:text-xl tracking-tighter transition-colors duration-300">
+              TAMAŞ
             </div>
-            <span className="font-serif text-2xl font-bold tracking-tight text-brand-brown dark:text-brand-green hidden sm:block transition-colors duration-300">
+            <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-brand-brown dark:text-brand-green block transition-colors duration-300">
               BULGUR
             </span>
           </motion.div>
