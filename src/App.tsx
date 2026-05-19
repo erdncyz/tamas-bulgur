@@ -39,13 +39,13 @@ function AppContent() {
         <Hero />
         <AboutUs />
         <Features />
-        <div className="h-40" style={{
+        <div className="h-16 sm:h-24 lg:h-40" style={{
           background: theme === 'dark' 
             ? 'linear-gradient(to bottom, #1f2937, #111827)' 
             : 'linear-gradient(to bottom, #F5F2ED, #FCF9F5)'
         }} />
         <Products />
-        <div className="h-40" style={{
+        <div className="h-16 sm:h-24 lg:h-40" style={{
           background: theme === 'dark' 
             ? 'linear-gradient(to bottom, #111827, #1f2937)' 
             : 'linear-gradient(to bottom, #FCF9F5, #F5F2ED)'

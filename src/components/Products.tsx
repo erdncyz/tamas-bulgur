@@ -43,9 +43,9 @@ export default function Products() {
   ];
 
   return (
-    <section id="products" className="py-24 bg-brand-white dark:bg-gray-900 transition-colors duration-300">
+    <section id="products" className="py-14 sm:py-18 lg:py-24 bg-brand-white dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <motion.span
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -64,7 +64,7 @@ export default function Products() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg"
+            className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg"
           >
             {language === "tr"
               ? "Her biri özenle seçilmiş tahıllardan, hiçbir katkı maddesi eklenmeden üretilen doğal ürünlerimizi keşfedin."
@@ -73,7 +73,7 @@ export default function Products() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {productsData.map((product, index) => (
             <motion.div
               key={product.id}
@@ -83,7 +83,7 @@ export default function Products() {
               transition={{ delay: index * 0.1 }}
               className="group"
             >
-              <div className="relative aspect-square overflow-hidden rounded-2xl mb-6 bg-brand-cream dark:bg-gray-800">
+              <div className="relative aspect-square overflow-hidden rounded-2xl mb-4 sm:mb-6 bg-brand-cream dark:bg-gray-800">
                 <img
                   src={product.image}
                   alt={product.name}

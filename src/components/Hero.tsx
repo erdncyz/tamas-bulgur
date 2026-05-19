@@ -1,22 +1,59 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "../contexts";
-import { translations } from "../contexts/translations";
 
 export default function Hero() {
+  const [activeImage, setActiveImage] = useState(0);
   const { language } = useLanguage();
-  const t = translations[language];
+
+  const heroImages = [
+    {
+      src: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1920&auto=format&fit=crop",
+      altTr: "Bulgur buğdayı taneleri",
+      altEn: "Bulgur wheat grains",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1920&auto=format&fit=crop",
+      altTr: "Buğday tarlasında hasat",
+      altEn: "Harvest in a wheat field",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1920&auto=format&fit=crop",
+      altTr: "Doğal buğday başakları",
+      altEn: "Natural wheat spikes",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1535041113207-ec1c85537f31?q=80&w=1920&auto=format&fit=crop",
+      altTr: "Taş değirmen üretim teması",
+      altEn: "Stone mill production theme",
+    },
+  ];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % heroImages.length);
+    }, 5500);
+
+    return () => window.clearInterval(timer);
+  }, [heroImages.length]);
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with placeholder overlay */}
+      {/* Timed background slideshow */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1920&auto=format&fit=crop"
-          alt={language === "tr" ? "Bulgur Tarlası veya Değirmen" : "Bulgur Field or Mill"}
-          className="w-full h-full object-cover"
-          referrerPolicy="no-referrer"
-        />
+        {heroImages.map((image, index) => (
+          <img
+            key={image.src}
+            src={image.src}
+            alt={language === "tr" ? image.altTr : image.altEn}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              index === activeImage ? "opacity-100" : "opacity-0"
+            }`}
+            referrerPolicy="no-referrer"
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+        ))}
         <div className="absolute inset-0 bg-brand-brown/40 dark:bg-brand-brown/60 backdrop-brightness-75 dark:backdrop-brightness-50" />
       </div>
 
