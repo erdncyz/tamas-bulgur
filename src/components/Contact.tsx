@@ -89,18 +89,18 @@ export default function Contact() {
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white dark:bg-gray-700 p-1 rounded-3xl shadow-xl overflow-hidden min-h-[400px] transition-colors duration-300"
+            className="bg-white dark:bg-gray-700 p-1 rounded-3xl shadow-xl overflow-hidden h-[400px] sm:h-[500px] lg:min-h-[400px] transition-colors duration-300"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1578.4716766442654!2d38.257608!3d38.337189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4076378e9f50e82f%3A0xe54e334a9e59d4!2s%C3%96zsan%20Sanayi%20Sitesi!5e0!3m2!1str!2str!4v1716138601192!5m2!1str!2str"
               width="100%"
               height="100%"
-              style={{ border: 0, minHeight: "400px" }}
+              style={{ border: 0 }}
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Google Maps"
-              className="rounded-3xl"
+              className="rounded-3xl w-full h-full"
             ></iframe>
           </motion.div>
         </div>
