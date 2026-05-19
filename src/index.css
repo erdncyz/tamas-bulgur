@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -8,25 +8,108 @@
   --color-brand-green: #5A6A40;
   --color-brand-cream: #F5F2ED;
   --color-brand-white: #FCF9F5;
-  --font-serif: "Cormorant Garamond", serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
   :root {
     color-scheme: light;
+    --bg: #f2ede3;
+    --bg-secondary: #f8f3ea;
+    --panel: rgba(255, 252, 246, 0.82);
+    --panel-strong: #fffdf7;
+    --text-primary: #2f241a;
+    --text-secondary: #695d51;
+    --line: rgba(61, 43, 31, 0.12);
+    --glow: 96 74 34;
+    --accent: #5a6a40;
+    --accent-soft: rgba(90, 106, 64, 0.14);
+    --shadow-soft: 0 14px 32px rgba(74, 52, 35, 0.1);
+    --shadow-card: 0 20px 48px rgba(74, 52, 35, 0.16);
   }
 
   :root.dark {
     color-scheme: dark;
+    --bg: #0f141b;
+    --bg-secondary: #141b24;
+    --panel: rgba(20, 30, 41, 0.7);
+    --panel-strong: #172230;
+    --text-primary: #f0eadf;
+    --text-secondary: #b7b4ad;
+    --line: rgba(255, 255, 255, 0.12);
+    --glow: 133 156 103;
+    --accent: #859c67;
+    --accent-soft: rgba(133, 156, 103, 0.15);
+    --shadow-soft: 0 18px 36px rgba(0, 0, 0, 0.42);
+    --shadow-card: 0 28px 56px rgba(0, 0, 0, 0.5);
   }
-  
+
+  * {
+    @apply border-transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-[#FCF9F5] dark:bg-gray-900 text-gray-900 dark:text-white font-sans antialiased transition-colors duration-300;
+    @apply font-sans antialiased transition-colors duration-500;
+    background:
+      radial-gradient(circle at 14% 12%, rgba(var(--glow), 0.17), transparent 34%),
+      radial-gradient(circle at 86% 8%, rgba(var(--glow), 0.12), transparent 30%),
+      linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 46%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
   }
-  
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 0.7px, transparent 0.7px);
+    background-size: 3px 3px;
+    opacity: 0.25;
+    z-index: -1;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+  }
+
+  p {
+    color: var(--text-secondary);
+  }
+
+  ::selection {
+    background: rgba(var(--glow), 0.28);
+    color: var(--text-primary);
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .section-shell {
+    background: linear-gradient(145deg, color-mix(in srgb, var(--panel) 84%, transparent), color-mix(in srgb, var(--bg-secondary) 80%, transparent));
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(8px);
+  }
+
+  .surface-card {
+    background: linear-gradient(160deg, color-mix(in srgb, var(--panel-strong) 86%, transparent), color-mix(in srgb, var(--panel) 86%, transparent));
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+  }
+
+  .accent-tag {
+    @apply inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em];
+    background: var(--accent-soft);
+    color: var(--accent);
   }
 }
 

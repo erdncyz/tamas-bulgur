@@ -1,14 +1,59 @@
 import { motion } from "motion/react";
 import { Menu, X, Phone, Instagram, Sun, Moon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme, useLanguage } from "../contexts";
 import { translations } from "../contexts/translations";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isPhoneMenuOpen, setIsPhoneMenuOpen] = useState(false);
+  const desktopPhoneMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobilePhoneMenuRef = useRef<HTMLDivElement | null>(null);
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
   const t = translations[language];
+  const isSolid = isScrolled || isOpen;
+  const phoneNumbers = [
+    { label: "(0422) 238 39 22", href: "tel:+904222383922" },
+    { label: "0533 570 65 92", href: "tel:+905335706592" },
+    { label: "0537 418 27 62", href: "tel:+905374182762" },
+  ];
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onMouseDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+      const isInsideDesktop = desktopPhoneMenuRef.current?.contains(target) ?? false;
+      const isInsideMobile = mobilePhoneMenuRef.current?.contains(target) ?? false;
+      if (!isInsideDesktop && !isInsideMobile) {
+        setIsPhoneMenuOpen(false);
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsPhoneMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
 
   const navLinks = [
     { name: t.navbar.home, href: "#" },
@@ -19,10 +64,15 @@ export default function Navbar() {
 
   return (
     <nav 
-      className="fixed w-full z-50 backdrop-blur-md transition-colors duration-300"
+      className="fixed w-full z-50 transition-all duration-500"
       style={{
-        backgroundColor: theme === 'dark' ? 'rgba(31, 41, 55, 0.8)' : 'rgba(252, 249, 245, 0.8)',
-        borderBottom: `1px solid ${theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(61, 43, 31, 0.1)'}`
+        backgroundColor: isSolid
+          ? theme === "dark"
+            ? "rgba(12, 20, 28, 0.68)"
+            : "rgba(255, 250, 242, 0.72)"
+          : "rgba(0, 0, 0, 0.08)",
+        borderBottom: "none",
+        backdropFilter: isSolid ? "blur(20px)" : "blur(4px)"
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,7 +84,7 @@ export default function Navbar() {
           >
             <a
               href="#"
-              className="bg-white/95 dark:bg-white p-1.5 rounded-xl shadow-sm ring-1 ring-brand-brown/10 dark:ring-white/20"
+              className="bg-white/95 dark:bg-[#f3efe8] p-1.5 rounded-2xl shadow-lg ring-1 ring-brand-brown/10 dark:ring-white/20 transition-transform duration-300 hover:scale-[1.02]"
               aria-label={language === "tr" ? "Ana sayfa" : "Home"}
             >
               <img
@@ -54,16 +104,24 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-brand-green dark:hover:text-brand-green transition-colors uppercase tracking-widest"
+                className={`text-sm font-semibold transition-colors uppercase tracking-[0.2em] ${
+                  isSolid
+                    ? "text-[color:var(--text-secondary)] dark:text-[#d4d0c8] hover:text-brand-green"
+                    : "text-white/90 hover:text-white"
+                }`}
               >
                 {link.name}
               </a>
             ))}
-            <div className="flex items-center space-x-4 ml-4 pl-4 border-l border-brand-brown/20 dark:border-white/20">
+            <div className={`flex items-center space-x-3 ml-4 pl-4 border-l ${isSolid ? "border-brand-brown/20 dark:border-white/20" : "border-white/30"}`}>
               {/* Language Toggle */}
               <button
                 onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
-                className="px-3 py-1 text-sm font-bold text-brand-brown dark:text-brand-green hover:bg-brand-cream dark:hover:bg-gray-700 rounded-lg transition-colors duration-300 uppercase tracking-widest"
+                className={`px-3 py-1.5 text-xs font-extrabold rounded-full transition-colors duration-300 uppercase tracking-[0.2em] border ${
+                  isSolid
+                    ? "text-brand-brown dark:text-brand-green hover:bg-brand-cream/80 dark:hover:bg-white/10 border-brand-brown/15 dark:border-white/10"
+                    : "text-white hover:bg-white/10 border-white/35"
+                }`}
                 title={language === "tr" ? "Switch to English" : "Türkçe'ye geç"}
               >
                 {language === "tr" ? "EN" : "TR"}
@@ -71,39 +129,81 @@ export default function Navbar() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-2 text-brand-brown dark:text-brand-green hover:bg-brand-cream dark:hover:bg-gray-700 rounded-lg transition-colors duration-300"
+                className={`p-2.5 rounded-full transition-colors duration-300 border ${
+                  isSolid
+                    ? "text-brand-brown dark:text-brand-green hover:bg-brand-cream/80 dark:hover:bg-white/10 border-brand-brown/15 dark:border-white/10"
+                    : "text-white hover:bg-white/10 border-white/35"
+                }`}
                 title={theme === "light" ? "Dark mode" : "Light mode"}
               >
                 {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
               </button>
-              <a href="tel:04222383922" className="text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-yellow-400 transition-colors">
-                <Phone size={18} />
-              </a>
-              <a href="https://www.instagram.com/tamasbulgur/" target="_blank" rel="noopener noreferrer" className="text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-yellow-400 transition-colors">
+              <div className="relative" ref={desktopPhoneMenuRef}>
+                <button
+                  onClick={() => setIsPhoneMenuOpen((prev) => !prev)}
+                  className={`${isSolid ? "text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-white" : "text-white/90 hover:text-white"} transition-colors`}
+                  title={language === "tr" ? "Telefon numaraları" : "Phone numbers"}
+                  aria-expanded={isPhoneMenuOpen}
+                  aria-haspopup="menu"
+                >
+                  <Phone size={18} />
+                </button>
+
+                {isPhoneMenuOpen && (
+                  <div className="absolute right-0 top-10 w-52 rounded-2xl border border-brand-brown/10 dark:border-white/10 bg-brand-white/95 dark:bg-[#152131]/95 backdrop-blur-xl shadow-xl p-2 z-[60]">
+                    <p className="px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-brand-green dark:text-brand-green font-semibold">
+                      {language === "tr" ? "Aranabilir Numara" : "Callable Numbers"}
+                    </p>
+                    {phoneNumbers.map((phone) => (
+                      <a
+                        key={phone.href}
+                        href={phone.href}
+                        onClick={() => setIsPhoneMenuOpen(false)}
+                        className="block px-2 py-2 rounded-lg text-sm text-[color:var(--text-secondary)] dark:text-gray-200 hover:bg-brand-cream/70 dark:hover:bg-white/10 transition-colors"
+                      >
+                        {phone.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <a href="https://www.instagram.com/tamasbulgur/" target="_blank" rel="noopener noreferrer" className={`${isSolid ? "text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-white" : "text-white/90 hover:text-white"} transition-colors`}>
                 <Instagram size={18} />
               </a>
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center gap-1.5">
             {/* Language Toggle Mobile */}
             <button
               onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
-              className="px-2 py-1 text-xs font-bold text-brand-brown dark:text-brand-green uppercase tracking-widest"
+              className={`px-2.5 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.18em] rounded-full border ${
+                isSolid
+                  ? "text-brand-brown dark:text-brand-green border-brand-brown/20 dark:border-white/20"
+                  : "text-white border-white/35"
+              }`}
             >
               {language === "tr" ? "EN" : "TR"}
             </button>
             {/* Theme Toggle Mobile */}
             <button
               onClick={toggleTheme}
-              className="p-2 text-brand-brown dark:text-brand-green"
+              className={`p-2 rounded-full border ${
+                isSolid
+                  ? "text-brand-brown dark:text-brand-green border-brand-brown/20 dark:border-white/20"
+                  : "text-white border-white/35"
+              }`}
             >
               {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-brand-brown dark:text-brand-green p-2"
+              className={`p-2 rounded-full border ${
+                isSolid
+                  ? "text-brand-brown dark:text-brand-green border-brand-brown/20 dark:border-white/20"
+                  : "text-white border-white/35"
+              }`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -116,22 +216,50 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-brand-white dark:bg-gray-800 border-b border-brand-brown/10 dark:border-white/10 px-4 pt-2 pb-6 space-y-2 transition-colors duration-300"
+          className="md:hidden bg-brand-white/95 dark:bg-[#152131]/95 border-b border-brand-brown/10 dark:border-white/10 px-4 pt-2 pb-6 space-y-2 transition-colors duration-300"
         >
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block px-3 py-4 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-brand-cream dark:hover:bg-gray-700 rounded-md uppercase tracking-widest transition-colors duration-300"
+              className="block px-3 py-4 text-base font-semibold text-[color:var(--text-secondary)] dark:text-gray-200 hover:bg-brand-cream/70 dark:hover:bg-white/10 rounded-xl uppercase tracking-[0.16em] transition-colors duration-300"
             >
               {link.name}
             </a>
           ))}
-          <div className="flex space-x-6 pt-4 px-3">
-            <a href="tel:04222383922" className="text-brand-brown dark:text-brand-green">
-              <Phone size={24} />
-            </a>
+          <div className="flex flex-wrap items-center gap-5 pt-4 px-3" ref={mobilePhoneMenuRef}>
+            <div className="relative">
+              <button
+                onClick={() => setIsPhoneMenuOpen((prev) => !prev)}
+                className="text-brand-brown dark:text-brand-green"
+                title={language === "tr" ? "Telefon numaraları" : "Phone numbers"}
+                aria-expanded={isPhoneMenuOpen}
+                aria-haspopup="menu"
+              >
+                <Phone size={24} />
+              </button>
+              {isPhoneMenuOpen && (
+                <div className="absolute left-0 top-10 w-56 rounded-2xl border border-brand-brown/10 dark:border-white/10 bg-brand-white/95 dark:bg-[#152131]/95 backdrop-blur-xl shadow-xl p-2 z-[60]">
+                  <p className="px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-brand-green dark:text-brand-green font-semibold">
+                    {language === "tr" ? "Aranabilir Numara" : "Callable Numbers"}
+                  </p>
+                  {phoneNumbers.map((phone) => (
+                    <a
+                      key={phone.href}
+                      href={phone.href}
+                      onClick={() => {
+                        setIsPhoneMenuOpen(false);
+                        setIsOpen(false);
+                      }}
+                      className="block px-2 py-2 rounded-lg text-sm text-[color:var(--text-secondary)] dark:text-gray-200 hover:bg-brand-cream/70 dark:hover:bg-white/10 transition-colors"
+                    >
+                      {phone.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
             <a href="https://www.instagram.com/tamasbulgur/" target="_blank" rel="noopener noreferrer" className="text-brand-brown dark:text-brand-green">
               <Instagram size={24} />
             </a>

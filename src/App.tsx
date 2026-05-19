@@ -11,11 +11,10 @@ import Features from "./components/Features";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { motion, useScroll, useSpring } from "motion/react";
-import { ThemeProvider, LanguageProvider, useTheme } from "./contexts";
+import { ThemeProvider, LanguageProvider } from "./contexts";
 
 function AppContent() {
   const { scrollYProgress } = useScroll();
-  const { theme } = useTheme();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -23,33 +22,23 @@ function AppContent() {
   });
 
   return (
-    <div 
-      className="relative transition-colors duration-300"
-      style={{
-        backgroundColor: theme === 'dark' ? '#111827' : '#FCF9F5',
-        color: theme === 'dark' ? '#ffffff' : '#1f2937'
-      }}
-    >
+    <div className="relative overflow-hidden transition-colors duration-500">
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-70">
+        <div className="absolute -top-32 -left-28 h-80 w-80 rounded-full blur-3xl bg-brand-green/20 dark:bg-brand-green/15" />
+        <div className="absolute top-[34%] -right-24 h-96 w-96 rounded-full blur-3xl bg-brand-brown/15 dark:bg-brand-green/10" />
+      </div>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-brand-green z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-green/80 via-brand-brown/70 to-brand-green/90 z-[100] origin-left"
         style={{ scaleX }}
       />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <AboutUs />
         <Features />
-        <div className="h-16 sm:h-24 lg:h-40" style={{
-          background: theme === 'dark' 
-            ? 'linear-gradient(to bottom, #1f2937, #111827)' 
-            : 'linear-gradient(to bottom, #F5F2ED, #FCF9F5)'
-        }} />
+        <div className="h-6 sm:h-8 lg:h-10" />
         <Products />
-        <div className="h-16 sm:h-24 lg:h-40" style={{
-          background: theme === 'dark' 
-            ? 'linear-gradient(to bottom, #111827, #1f2937)' 
-            : 'linear-gradient(to bottom, #FCF9F5, #F5F2ED)'
-        }} />
+        <div className="h-6 sm:h-8 lg:h-10" />
         <Contact />
       </main>
       <Footer />

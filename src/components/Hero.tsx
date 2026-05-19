@@ -75,17 +75,22 @@ export default function Hero() {
       });
     };
 
-    if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(preload);
-      return () => window.cancelIdleCallback(id);
+    const withIdle = globalThis as typeof globalThis & {
+      requestIdleCallback?: (callback: () => void) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    if (withIdle.requestIdleCallback) {
+      const id = withIdle.requestIdleCallback(preload);
+      return () => withIdle.cancelIdleCallback?.(id);
     }
 
-    const timeoutId = window.setTimeout(preload, 300);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = globalThis.setTimeout(preload, 300);
+    return () => globalThis.clearTimeout(timeoutId);
   }, [heroImages]);
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Timed background slideshow */}
       <div className="absolute inset-0 z-0">
         {heroImages.map((image, index) => (
@@ -101,7 +106,7 @@ export default function Hero() {
             decoding="async"
           />
         ))}
-        <div className="absolute inset-0 bg-brand-brown/40 dark:bg-brand-brown/60 backdrop-brightness-75 dark:backdrop-brightness-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-brown/45 via-black/45 to-brand-brown/60 dark:from-black/60 dark:via-black/70 dark:to-black/75 backdrop-brightness-[0.72] dark:backdrop-brightness-[0.52]" />
       </div>
 
       <div className="absolute inset-0 z-20 pointer-events-none">
@@ -130,10 +135,10 @@ export default function Hero() {
           <span className="inline-block text-brand-white/80 font-medium tracking-[0.3em] uppercase text-sm mb-4">
             {language === "tr" ? "Bereketli Toprakların Geleneksel Tadı" : "Traditional Taste from Fertile Lands"}
           </span>
-          <h1 className="text-5xl md:text-8xl font-serif font-bold text-white mb-6 tracking-tight leading-[0.9]">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tight leading-[0.92] drop-shadow-[0_12px_28px_rgba(0,0,0,0.45)]">
             {language === "tr" ? "MALATYA TAŞ DEĞİRMEN BULGURU" : "MALATYA STONE MILL BULGUR"}
           </h1>
-          <p className="text-white/90 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-white/90 text-lg md:text-xl font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
             {language === "tr" 
               ? "1994'ten günümüze, atalarımızdan kalan taş değirmen usulüyle, en doğal ve en lezzetli bulgurları kendi imalatımızla sofralarınıza taşıyoruz."
               : "Since 1994, we have been bringing the most natural and delicious bulgur to your tables using traditional stone mill methods passed down from our ancestors."
@@ -145,7 +150,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#products"
-              className="bg-white dark:bg-brand-green dark:text-white text-brand-brown px-10 py-4 rounded-full font-semibold uppercase tracking-widest text-sm transition-shadow hover:shadow-xl w-full sm:w-auto"
+              className="bg-white text-brand-brown px-10 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-xs transition-all hover:shadow-2xl hover:shadow-black/30 w-full sm:w-auto border border-white/80"
             >
               {language === "tr" ? "Ürünlerimizi Keşfedin" : "Discover Our Products"}
             </motion.a>
@@ -153,7 +158,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="border border-white dark:border-brand-green text-white dark:text-brand-green px-10 py-4 rounded-full font-semibold uppercase tracking-widest text-sm hover:bg-white/10 dark:hover:bg-brand-green/10 transition-colors w-full sm:w-auto"
+              className="border border-white/70 text-white px-10 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-xs hover:bg-white/15 transition-colors w-full sm:w-auto backdrop-blur-sm"
             >
               {language === "tr" ? "Bize Ulaşın" : "Get in Touch"}
             </motion.a>

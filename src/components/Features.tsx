@@ -39,19 +39,19 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-14 sm:py-18 lg:py-24 bg-brand-white dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 sm:py-10 lg:py-12 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[2rem] sm:rounded-[2.5rem]">
         <div className="text-center mb-10 sm:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-serif font-bold text-brand-brown dark:text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-6"
           >
             {t.features.title}
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-1.5 lg:gap-2 pb-2 sm:pb-3">
           {featuresData.map((feature, index) => (
             <motion.div
               key={index}
@@ -59,15 +59,15 @@ export default function Features() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl bg-brand-cream/50 dark:bg-gray-800 border border-brand-brown/5 dark:border-white/10 hover:border-brand-green/20 dark:hover:border-brand-green/30 transition-all group"
+              className="surface-card flex flex-col items-center text-center px-6 py-8 sm:px-8 sm:py-10 rounded-3xl border border-brand-brown/5 dark:border-white/10 hover:border-brand-green/40 dark:hover:border-brand-green/45 transition-all group hover:-translate-y-1"
             >
               <div className="mb-4 sm:mb-6 text-brand-green dark:text-brand-green group-hover:scale-110 transition-transform duration-300">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-serif font-bold text-brand-brown dark:text-white mb-3 uppercase tracking-tight">
+              <h3 className="text-xl font-serif font-bold text-[color:var(--text-primary)] mb-3 uppercase tracking-tight">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed">
                 {feature.description}
               </p>
             </motion.div>
