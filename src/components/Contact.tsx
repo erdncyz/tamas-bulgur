@@ -86,9 +86,6 @@ export default function Contact() {
               <a href="https://www.instagram.com/tamasbulgur/" target="_blank" rel="noopener noreferrer" className="text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-white transition-colors">
                 <Instagram size={28} />
               </a>
-              <a href="#" className="text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-white transition-colors">
-                <Facebook size={28} />
-              </a>
             </div>
           </motion.div>
 
