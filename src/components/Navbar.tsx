@@ -30,14 +30,22 @@ export default function Navbar() {
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center space-x-2"
+            className="flex items-center"
           >
-            <div className="bg-brand-brown dark:bg-brand-green text-white p-2 rounded-lg font-serif font-bold text-lg sm:text-xl tracking-tighter transition-colors duration-300">
-              TAMAŞ
-            </div>
-            <span className="font-serif text-lg sm:text-2xl font-bold tracking-tight text-brand-brown dark:text-brand-green block transition-colors duration-300">
-              BULGUR
-            </span>
+            <a
+              href="#"
+              className="bg-white/95 dark:bg-white p-1.5 rounded-xl shadow-sm ring-1 ring-brand-brown/10 dark:ring-white/20"
+              aria-label={language === "tr" ? "Ana sayfa" : "Home"}
+            >
+              <img
+                src="/logo.jpeg"
+                alt={language === "tr" ? "Tamaş Bulgur logosu" : "Tamaş Bulgur logo"}
+                className="h-12 sm:h-14 w-auto object-contain"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </a>
           </motion.div>
 
           {/* Desktop Nav */}
