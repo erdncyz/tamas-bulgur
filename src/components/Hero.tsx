@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLanguage } from "../contexts";
 
@@ -9,34 +9,80 @@ export default function Hero() {
 
   const heroImages = [
     {
-      src: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?q=80&w=1920&auto=format&fit=crop",
+      src: "/1.jpeg",
       altTr: "Bulgur buğdayı taneleri",
       altEn: "Bulgur wheat grains",
     },
     {
-      src: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1920&auto=format&fit=crop",
-      altTr: "Buğday tarlasında hasat",
-      altEn: "Harvest in a wheat field",
+      src: "/2.jpeg",
+      altTr: "Buğday başakları",
+      altEn: "Wheat spikes",
     },
     {
-      src: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=1920&auto=format&fit=crop",
-      altTr: "Doğal buğday başakları",
-      altEn: "Natural wheat spikes",
+      src: "/3.jpeg",
+      altTr: "Tahıl ürünleri",
+      altEn: "Grain products",
     },
     {
-      src: "https://images.unsplash.com/photo-1535041113207-ec1c85537f31?q=80&w=1920&auto=format&fit=crop",
-      altTr: "Taş değirmen üretim teması",
-      altEn: "Stone mill production theme",
+      src: "/4.jpeg",
+      altTr: "Geleneksel bulgur üretimi",
+      altEn: "Traditional bulgur production",
+    },
+    {
+      src: "/5.jpeg",
+      altTr: "Seçilmiş buğday",
+      altEn: "Selected wheat",
+    },
+    {
+      src: "/6.jpeg",
+      altTr: "Doğal tahıl dokusu",
+      altEn: "Natural grain texture",
+    },
+    {
+      src: "/7.jpeg",
+      altTr: "Taş değirmen teması",
+      altEn: "Stone mill theme",
+    },
+    {
+      src: "/8.jpeg",
+      altTr: "Bulgur ve buğday ürünleri",
+      altEn: "Bulgur and wheat products",
     },
   ];
+
+  const goNext = () => {
+    setActiveImage((prev) => (prev + 1) % heroImages.length);
+  };
+
+  const goPrev = () => {
+    setActiveImage((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+  };
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveImage((prev) => (prev + 1) % heroImages.length);
-    }, 5500);
+    }, 2000);
 
     return () => window.clearInterval(timer);
   }, [heroImages.length]);
+
+  useEffect(() => {
+    // Preload remaining slides after first paint to make manual/auto transitions instant.
+    const preload = () => {
+      heroImages.slice(1).forEach((image) => {
+        const img = new Image();
+        img.src = image.src;
+      });
+    };
+
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(preload);
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timeoutId = window.setTimeout(preload, 300);
+    return () => window.clearTimeout(timeoutId);
+  }, [heroImages]);
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -50,11 +96,29 @@ export default function Hero() {
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
               index === activeImage ? "opacity-100" : "opacity-0"
             }`}
-            referrerPolicy="no-referrer"
             loading={index === 0 ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : "auto"}
+            decoding="async"
           />
         ))}
         <div className="absolute inset-0 bg-brand-brown/40 dark:bg-brand-brown/60 backdrop-brightness-75 dark:backdrop-brightness-50" />
+      </div>
+
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        <button
+          onClick={goPrev}
+          className="pointer-events-auto absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/30 hover:bg-black/45 text-white transition-colors"
+          aria-label={language === "tr" ? "Önceki görsel" : "Previous image"}
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={goNext}
+          className="pointer-events-auto absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/30 hover:bg-black/45 text-white transition-colors"
+          aria-label={language === "tr" ? "Sonraki görsel" : "Next image"}
+        >
+          <ChevronRight size={24} />
+        </button>
       </div>
 
       <div className="relative z-10 text-center px-4 max-w-4xl">
