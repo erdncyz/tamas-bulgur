@@ -6,6 +6,7 @@ import { translations } from "../contexts/translations";
 
 function ProductCard({ product, index, onSelect }) {
   const [imageIndex, setImageIndex] = useState(0);
+  const prioritizeImage = index < 2;
 
   useEffect(() => {
     if (!product.images || product.images.length <= 1) return;
@@ -35,9 +36,9 @@ function ProductCard({ product, index, onSelect }) {
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           style={{ objectPosition: product.imagePosition ?? "50% 0%" }}
-          loading="lazy"
+          loading={prioritizeImage ? "eager" : "lazy"}
           decoding="async"
-          fetchPriority="low"
+          fetchPriority={prioritizeImage ? "high" : "auto"}
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-brand-brown/30 dark:bg-black/35 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center">

@@ -24,7 +24,6 @@ export default function AboutUs() {
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
-                fetchPriority="low"
               />
             </div>
             {/* Floating Experience Badge */}
