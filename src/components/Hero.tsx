@@ -9,47 +9,47 @@ export default function Hero() {
 
   const heroImages = [
     {
-      src: "/1.jpeg",
+      src: "/1.webp",
       altTr: "Bulgur buğdayı taneleri",
       altEn: "Bulgur wheat grains",
     },
     {
-      src: "/2.jpeg",
+      src: "/2.webp",
       altTr: "Buğday başakları",
       altEn: "Wheat spikes",
     },
     {
-      src: "/3.jpeg",
+      src: "/3.webp",
       altTr: "Tahıl ürünleri",
       altEn: "Grain products",
     },
     {
-      src: "/4.jpeg",
+      src: "/4.webp",
       altTr: "Bulgur üretim detayı",
       altEn: "Bulgur production detail",
     },
     {
-      src: "/9.jpeg",
+      src: "/9.webp",
       altTr: "Geleneksel bulgur üretim sahnesi",
       altEn: "Traditional bulgur production scene",
     },
     {
-      src: "/5.jpeg",
+      src: "/5.webp",
       altTr: "Seçilmiş buğday",
       altEn: "Selected wheat",
     },
     {
-      src: "/6.jpeg",
+      src: "/6.webp",
       altTr: "Doğal tahıl dokusu",
       altEn: "Natural grain texture",
     },
     {
-      src: "/7.jpeg",
+      src: "/7.webp",
       altTr: "Taş değirmen teması",
       altEn: "Stone mill theme",
     },
     {
-      src: "/8.jpeg",
+      src: "/8.webp",
       altTr: "Bulgur ve buğday ürünleri",
       altEn: "Bulgur and wheat products",
     },

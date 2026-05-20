@@ -14,7 +14,7 @@ export default function Footer() {
             aria-label={language === "tr" ? "Ana sayfa" : "Home"}
           >
             <img
-              src="/logo.jpeg"
+              src="/logo.webp"
               alt={language === "tr" ? "Tamaş Bulgur logosu" : "Tamaş Bulgur logo"}
               className="h-12 sm:h-14 w-auto object-contain"
               loading="lazy"

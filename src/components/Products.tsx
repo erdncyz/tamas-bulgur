@@ -100,8 +100,8 @@ export default function Products() {
       description: language === "tr"
         ? "Taş değirmende öğütülmüş, geleneksel tane yapısına sahip birinci sınıf pilavlık bulgur."
         : "Stone mill ground, first-class pilaf bulgur with traditional grain structure.",
-      image: "/pilavlık1.jpeg",
-      images: ["/pilavlık1.jpeg", "/pilavlık2.jpeg", "/pilavlık3.jpeg", "/pilavlık4.jpeg"],
+      image: "/pilavlık1.webp",
+      images: ["/pilavlık1.webp", "/pilavlık2.webp", "/pilavlık3.webp", "/pilavlık4.webp"],
       longDescription:
         language === "tr"
           ? "Pilavlık Bulgur, seçkin Anadolu buğdayından elde edilir ve taş değirmen yöntemiyle düşük sıcaklıkta işlenir. Bu sayede tane bütünlüğünü korur, pişirme sırasında diri kalır ve lezzetini sofraya tam taşır."
@@ -133,8 +133,8 @@ export default function Products() {
       description: language === "tr"
         ? "Pilavdan tencere yemeklerine kadar geniş kullanım sunan dengeli taneli orta bulgur."
         : "Balanced medium bulgur suitable for pilaf and a wide range of cooked dishes.",
-      image: "/ortabulgur1.jpeg",
-      images: ["/ortabulgur1.jpeg", "/ortabulgur2.jpeg", "/ortabulgur3.jpeg"],
+      image: "/ortabulgur1.webp",
+      images: ["/ortabulgur1.webp", "/ortabulgur2.webp", "/ortabulgur3.webp"],
       imagePosition: "50% 8%",
       longDescription:
         language === "tr"
@@ -157,7 +157,7 @@ export default function Products() {
       description: language === "tr"
         ? "Özel seçilmiş buğdaylardan hazırlanan, uzun süre bekletilmeden dövülen aşurelik buğday."
         : "Prepared from specially selected wheat, ashure wheat pounded without prolonged storage.",
-      image: "/asure.jpeg",
+      image: "/asure.webp",
       imagePosition: "50% 8%",
       longDescription:
         language === "tr"
@@ -191,8 +191,8 @@ export default function Products() {
       description: language === "tr"
         ? "Yöresel çorbalarınız ve yemekleriniz için taş değirmenlerin geleneksel yarması."
         : "Traditional stone mill cracked wheat for local soups and dishes.",
-      image: "/inceyarma.jpeg",
-      images: ["/inceyarma.jpeg", "/ortayarma.jpeg", "/iriyarma.jpeg"],
+      image: "/inceyarma.webp",
+      images: ["/inceyarma.webp", "/ortayarma.webp", "/iriyarma.webp"],
       imagePosition: "50% 8%",
       imageLabels: language === "tr" ? ["İnce Yarma", "Orta Yarma", "İri Yarma"] : ["Fine Cracked Wheat", "Medium Cracked Wheat", "Coarse Cracked Wheat"],
       longDescription:
@@ -226,7 +226,7 @@ export default function Products() {
       description: language === "tr"
         ? "Çiğ köfte ve kısır tarifleri için özel öğütülmüş, kıvamı güçlü çiğköftelik bulgur."
         : "Specially milled fine bulgur for cigkofte and kısır recipes with strong texture.",
-      image: "/cıgkofte.jpeg",
+      image: "/cıgkofte.webp",
       imagePosition: "50% 8%",
       longDescription:
         language === "tr"

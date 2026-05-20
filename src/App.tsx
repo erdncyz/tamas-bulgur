@@ -63,20 +63,20 @@ function AppContent() {
         <Hero />
         <AboutUs />
         <SectionBanner
-          src="/banner1.jpeg"
+          src="/banner1.webp"
           alt="Tamaş Bulgur banner görseli 1"
           imageClassName="object-[50%_42%]"
         />
         <Features />
         <SectionBanner
-          src="/banner2.jpeg"
+          src="/banner2.webp"
           alt="Tamaş Bulgur banner görseli 2"
           imageClassName="object-[60%_74%] scale-[1.08]"
         />
         <div className="h-6 sm:h-8 lg:h-10" />
         <Products />
         <SectionBanner
-          src="/banner3.jpeg"
+          src="/banner3.webp"
           alt="Tamaş Bulgur banner görseli 3"
           imageClassName="object-[50%_46%]"
         />
