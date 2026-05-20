@@ -35,6 +35,9 @@ function ProductCard({ product, index, onSelect }) {
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           style={{ objectPosition: product.imagePosition ?? "50% 0%" }}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-brand-brown/30 dark:bg-black/35 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -299,6 +302,9 @@ export default function Products() {
                     alt={selectedProduct.name}
                     className="w-full h-full object-cover transition-transform duration-500"
                     style={{ objectPosition: selectedProduct.imagePosition ?? "50% 0%" }}
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
                     referrerPolicy="no-referrer"
                   />
                   {selectedProduct.images && selectedProduct.images.length > 1 && (

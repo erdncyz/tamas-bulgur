@@ -22,6 +22,9 @@ export default function AboutUs() {
                 src="/tamas.png"
                 alt={language === "tr" ? "Geleneksel Üretim" : "Traditional Production"}
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
               />
             </div>
             {/* Floating Experience Badge */}
