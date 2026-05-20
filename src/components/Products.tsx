@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../contexts";
 import { translations } from "../contexts/translations";
 
@@ -92,6 +92,38 @@ export default function Products() {
   const t = translations[language];
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const productsScrollerRef = useRef<HTMLDivElement | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollControls = () => {
+    const scroller = productsScrollerRef.current;
+    if (!scroller) {
+      setCanScrollLeft(false);
+      setCanScrollRight(false);
+      return;
+    }
+
+    const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+    if (maxScrollLeft <= 1) {
+      setCanScrollLeft(false);
+      setCanScrollRight(false);
+      return;
+    }
+
+    setCanScrollLeft(scroller.scrollLeft > 1);
+    setCanScrollRight(scroller.scrollLeft < maxScrollLeft - 1);
+  };
+
+  const scrollProducts = (direction: "left" | "right") => {
+    const scroller = productsScrollerRef.current;
+    if (!scroller) return;
+
+    scroller.scrollBy({
+      left: direction === "left" ? -360 : 360,
+      behavior: "smooth",
+    });
+  };
 
   const productsData = [
     {
@@ -115,7 +147,7 @@ export default function Products() {
           ? ["Pilav", "Sebzeli bulgur", "Etli ana yemek yanında"]
           : ["Pilaf", "Vegetable bulgur", "As a side with meat dishes"],
       packageOptions:
-        language === "tr" ? ["1 kg", "5 kg", "10 kg", "25 kg"] : ["1 kg", "5 kg", "10 kg", "25 kg"],
+        language === "tr" ? ["5 kg", "10 kg", "25 kg"] : ["5 kg", "10 kg", "25 kg"],
       nutritionFacts: {
         serving: "100 gr",
         energy: { kcal: 326, kj: 1365 },
@@ -274,6 +306,20 @@ export default function Products() {
 
     return () => clearInterval(interval);
   }, [selectedProduct?.images]);
+
+  useEffect(() => {
+    const scroller = productsScrollerRef.current;
+    if (!scroller) return;
+
+    updateScrollControls();
+    scroller.addEventListener("scroll", updateScrollControls, { passive: true });
+    window.addEventListener("resize", updateScrollControls);
+
+    return () => {
+      scroller.removeEventListener("scroll", updateScrollControls);
+      window.removeEventListener("resize", updateScrollControls);
+    };
+  }, [selectedProductId, language]);
 
   return (
     <section id="products" className="py-8 sm:py-10 lg:py-12 transition-colors duration-300">
@@ -515,16 +561,43 @@ export default function Products() {
               </motion.p>
             </div>
 
-            <div className="overflow-x-auto overflow-y-hidden pb-3 sm:pb-4 snap-x snap-mandatory scroll-smooth touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex gap-4 sm:gap-6 px-1 sm:px-0 pr-4">
-              {sortedProducts.map((product, index) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  index={index}
-                  onSelect={() => setSelectedProductId(product.id)}
-                />
-              ))}
+            <div className="mx-auto w-full max-w-[74rem]">
+              <div className="md:grid md:grid-cols-[auto_1fr_auto] md:items-center md:gap-3 lg:gap-4">
+                <button
+                  type="button"
+                  onClick={() => scrollProducts("left")}
+                  disabled={!canScrollLeft}
+                  className="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-brown/20 dark:border-white/20 text-[color:var(--text-primary)] hover:bg-brand-cream/70 dark:hover:bg-white/10 transition-colors disabled:opacity-35 disabled:cursor-not-allowed disabled:hover:bg-transparent dark:disabled:hover:bg-transparent"
+                  aria-label={language === "tr" ? "Sola kaydır" : "Scroll left"}
+                >
+                  <ArrowLeft size={18} />
+                </button>
+
+                <div
+                  ref={productsScrollerRef}
+                  className="overflow-x-auto overflow-y-hidden px-4 sm:px-6 lg:px-4 pb-3 sm:pb-4 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                >
+                  <div className={`flex gap-4 sm:gap-6 ${!canScrollLeft && !canScrollRight ? "justify-center" : ""}`}>
+                  {sortedProducts.map((product, index) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      index={index}
+                      onSelect={() => setSelectedProductId(product.id)}
+                    />
+                  ))}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => scrollProducts("right")}
+                  disabled={!canScrollRight}
+                  className="hidden md:inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-brown/20 dark:border-white/20 text-[color:var(--text-primary)] hover:bg-brand-cream/70 dark:hover:bg-white/10 transition-colors disabled:opacity-35 disabled:cursor-not-allowed disabled:hover:bg-transparent dark:disabled:hover:bg-transparent"
+                  aria-label={language === "tr" ? "Sağa kaydır" : "Scroll right"}
+                >
+                  <ArrowRight size={18} />
+                </button>
               </div>
             </div>
           </>
