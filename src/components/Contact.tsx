@@ -9,8 +9,8 @@ export default function Contact() {
   const mapsUrl = "https://www.google.com/maps/search/?api=1&query=%C3%96zsan+Sanayi+Sitesi+36.+Blok+No:+22+Ye%C5%9Filyurt+Malatya";
 
   return (
-    <section id="contact" className="py-6 sm:py-10 lg:py-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 section-shell rounded-[1.4rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
+    <section id="contact" className="py-7 sm:py-11 lg:py-14 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[1.7rem] sm:rounded-[2.6rem] p-5 sm:p-7 lg:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* Info Section */}
           <motion.div
@@ -21,7 +21,7 @@ export default function Contact() {
             <span className="text-brand-green dark:text-brand-green font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block text-center lg:text-left">
               {t.contact.title}
             </span>
-            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-5 sm:mb-10 leading-tight text-center lg:text-left text-balance">
+            <h2 className="text-[2rem] sm:text-4xl md:text-[4rem] font-serif font-bold text-[color:var(--text-primary)] mb-5 sm:mb-10 leading-[0.95] text-center lg:text-left text-balance">
               {language === "tr" 
                 ? "Her Türlü Sorunuz ve Siparişiniz İçin Yanınızdayız"
                 : "We Are Here for All Your Questions and Orders"
@@ -35,7 +35,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="flex items-start gap-4 sm:gap-6 group pb-5 sm:pb-7 border-b border-brand-brown/10 dark:border-white/10"
               >
-                <div className="bg-white/85 dark:bg-[#243244] p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
+                <div className="surface-card luxury-border p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
                   <MapPin size={24} />
                 </div>
                 <div>
@@ -52,7 +52,7 @@ export default function Contact() {
               </a>
 
               <div className="flex items-start gap-4 sm:gap-6 group pt-5 sm:pt-7 pb-5 sm:pb-7 border-b border-brand-brown/10 dark:border-white/10">
-                <div className="bg-white/85 dark:bg-[#243244] p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
+                <div className="surface-card luxury-border p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
                   <Phone size={24} />
                 </div>
                 <div>
@@ -68,7 +68,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-4 sm:gap-6 group pt-5 sm:pt-7 pb-5 sm:pb-7 border-b border-brand-brown/10 dark:border-white/10">
-                <div className="bg-white/85 dark:bg-[#243244] p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
+                <div className="surface-card luxury-border p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
                   <Mail size={24} />
                 </div>
                 <div>
@@ -89,7 +89,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-6 group"
               >
-                <div className="bg-white/85 dark:bg-[#243244] p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
+                <div className="surface-card luxury-border p-3 sm:p-4 rounded-2xl shadow-sm text-brand-green dark:text-brand-green group-hover:bg-brand-green dark:group-hover:bg-brand-green group-hover:text-white dark:group-hover:text-white transition-colors border border-brand-brown/10 dark:border-white/10">
                   <Instagram size={22} />
                 </div>
                 <div>
@@ -109,7 +109,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="surface-card p-2 rounded-3xl overflow-hidden h-[330px] sm:h-[470px] lg:h-full self-stretch transition-colors duration-300"
+            className="surface-card luxury-border p-2 rounded-3xl overflow-hidden h-[330px] sm:h-[470px] lg:h-full self-stretch transition-colors duration-300"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1578.4716766442654!2d38.257608!3d38.337189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4076378e9f50e82f%3A0xe54e334a9e59d4!2s%C3%96zsan%20Sanayi%20Sitesi!5e0!3m2!1str!2str!4v1716138601192!5m2!1str!2str"

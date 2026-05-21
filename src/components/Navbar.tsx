@@ -66,17 +66,19 @@ export default function Navbar() {
     <nav
       className="fixed w-full z-50 transition-all duration-500"
       style={{
-        backgroundColor: isSolid
-          ? theme === "dark"
-            ? "rgba(12, 20, 28, 0.68)"
-            : "rgba(255, 250, 242, 0.72)"
-          : "rgba(0, 0, 0, 0.08)",
+        backgroundColor: "transparent",
         borderBottom: "none",
-        backdropFilter: isSolid ? "blur(20px)" : "blur(4px)"
+        backdropFilter: "none",
       }}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-18 sm:h-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4">
+        <div
+          className={`flex justify-between h-16 sm:h-[4.6rem] items-center rounded-2xl sm:rounded-[1.4rem] px-3 sm:px-4 transition-all duration-500 ${
+            isSolid
+              ? "surface-card luxury-border shadow-xl"
+              : "bg-white/8 dark:bg-black/10 backdrop-blur-md border border-white/25 dark:border-white/15"
+          }`}
+        >
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -84,13 +86,13 @@ export default function Navbar() {
           >
             <a
               href="#"
-              className="bg-white/95 dark:bg-[#f3efe8] p-1.5 rounded-2xl shadow-lg ring-1 ring-brand-brown/10 dark:ring-white/20 transition-transform duration-300 hover:scale-[1.02]"
+              className="bg-white/95 dark:bg-[#ece5d8] p-1.5 sm:p-2 rounded-xl shadow-lg ring-1 ring-brand-brown/10 dark:ring-white/15 transition-transform duration-300 hover:scale-[1.02]"
               aria-label={language === "tr" ? "Ana sayfa" : "Home"}
             >
               <img
                 src="/logo.webp"
                 alt={language === "tr" ? "Tamaş Bulgur logosu" : "Tamaş Bulgur logo"}
-                className="h-11 sm:h-14 w-auto object-contain"
+                className="h-10 sm:h-11 w-auto object-contain"
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
@@ -99,12 +101,12 @@ export default function Navbar() {
           </motion.div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-7">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-semibold transition-colors uppercase tracking-[0.2em] ${
+                className={`text-[0.92rem] font-semibold transition-colors uppercase tracking-[0.19em] ${
                   isSolid
                     ? "text-[color:var(--text-secondary)] dark:text-[#d4d0c8] hover:text-brand-green"
                     : "text-white/90 hover:text-white"
@@ -113,11 +115,11 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <div className={`flex items-center space-x-3 ml-4 pl-4 border-l ${isSolid ? "border-brand-brown/20 dark:border-white/20" : "border-white/30"}`}>
+            <div className={`flex items-center gap-2 ml-2 pl-5 border-l ${isSolid ? "border-brand-brown/20 dark:border-white/20" : "border-white/30"}`}>
               {/* Language Toggle */}
               <button
                 onClick={() => setLanguage(language === "tr" ? "en" : "tr")}
-                className={`px-3 py-1.5 text-xs font-extrabold rounded-full transition-colors duration-300 uppercase tracking-[0.2em] border ${
+                className={`inline-flex h-12 min-w-[4.75rem] items-center justify-center px-4 text-[0.95rem] font-semibold rounded-full transition-colors duration-300 uppercase tracking-[0.13em] border ${
                   isSolid
                     ? "text-brand-brown dark:text-brand-green hover:bg-brand-cream/80 dark:hover:bg-white/10 border-brand-brown/15 dark:border-white/10"
                     : "text-white hover:bg-white/10 border-white/35"
@@ -129,28 +131,32 @@ export default function Navbar() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className={`p-2.5 rounded-full transition-colors duration-300 border ${
+                className={`inline-flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300 border ${
                   isSolid
                     ? "text-brand-brown dark:text-brand-green hover:bg-brand-cream/80 dark:hover:bg-white/10 border-brand-brown/15 dark:border-white/10"
                     : "text-white hover:bg-white/10 border-white/35"
                 }`}
                 title={theme === "light" ? "Dark mode" : "Light mode"}
               >
-                {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+                {theme === "light" ? <Moon size={20} strokeWidth={2} /> : <Sun size={20} strokeWidth={2} />}
               </button>
               <div className="relative" ref={desktopPhoneMenuRef}>
                 <button
                   onClick={() => setIsPhoneMenuOpen((prev) => !prev)}
-                  className={`${isSolid ? "text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-white" : "text-white/90 hover:text-white"} transition-colors`}
+                  className={`inline-flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300 border ${
+                    isSolid
+                      ? "text-brand-brown dark:text-brand-green hover:bg-brand-cream/80 dark:hover:bg-white/10 border-brand-brown/15 dark:border-white/10"
+                      : "text-white hover:bg-white/10 border-white/35"
+                  }`}
                   title={language === "tr" ? "Telefon numaraları" : "Phone numbers"}
                   aria-expanded={isPhoneMenuOpen}
                   aria-haspopup="menu"
                 >
-                  <Phone size={18} />
+                  <Phone size={20} strokeWidth={2} />
                 </button>
 
                 {isPhoneMenuOpen && (
-                  <div className="absolute right-0 top-10 w-52 rounded-2xl border border-brand-brown/10 dark:border-white/10 bg-brand-white/95 dark:bg-[#152131]/95 backdrop-blur-xl shadow-xl p-2 z-[60]">
+                  <div className="absolute right-0 top-12 w-52 rounded-2xl border border-brand-brown/10 dark:border-white/10 bg-brand-white/95 dark:bg-[#1e252d]/95 backdrop-blur-xl shadow-xl p-2 z-[60]">
                     <p className="px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-brand-green dark:text-brand-green font-semibold">
                       {language === "tr" ? "Aranabilir Numara" : "Callable Numbers"}
                     </p>
@@ -167,8 +173,17 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-              <a href="https://www.instagram.com/tamasbulgur/" target="_blank" rel="noopener noreferrer" className={`${isSolid ? "text-brand-brown dark:text-brand-green hover:text-brand-green dark:hover:text-white" : "text-white/90 hover:text-white"} transition-colors`}>
-                <Instagram size={18} />
+              <a
+                href="https://www.instagram.com/tamasbulgur/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex h-12 w-12 items-center justify-center rounded-full transition-colors duration-300 border ${
+                  isSolid
+                    ? "text-brand-brown dark:text-brand-green hover:bg-brand-cream/80 dark:hover:bg-white/10 border-brand-brown/15 dark:border-white/10"
+                    : "text-white hover:bg-white/10 border-white/35"
+                }`}
+              >
+                <Instagram size={20} strokeWidth={2} />
               </a>
             </div>
           </div>
@@ -217,7 +232,7 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-brand-white/95 dark:bg-[#152131]/95 border-b border-brand-brown/10 dark:border-white/10 px-3 pt-3 pb-6 space-y-2 transition-colors duration-300"
+          className="md:hidden mx-4 mt-2 rounded-2xl surface-card luxury-border px-3 pt-3 pb-6 space-y-2 transition-colors duration-300"
         >
           {navLinks.map((link) => (
             <a
@@ -241,7 +256,7 @@ export default function Navbar() {
                 <Phone size={24} />
               </button>
               {isPhoneMenuOpen && (
-                <div className="absolute left-0 top-10 w-56 rounded-2xl border border-brand-brown/10 dark:border-white/10 bg-brand-white/95 dark:bg-[#152131]/95 backdrop-blur-xl shadow-xl p-2 z-[60]">
+                <div className="absolute left-0 top-10 w-56 rounded-2xl border border-brand-brown/10 dark:border-white/10 bg-brand-white/95 dark:bg-[#1e252d]/95 backdrop-blur-xl shadow-xl p-2 z-[60]">
                   <p className="px-2 py-1 text-[10px] uppercase tracking-[0.16em] text-brand-green dark:text-brand-green font-semibold">
                     {language === "tr" ? "Aranabilir Numara" : "Callable Numbers"}
                   </p>

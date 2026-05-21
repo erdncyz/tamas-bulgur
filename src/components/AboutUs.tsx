@@ -7,8 +7,8 @@ export default function AboutUs() {
   const t = translations[language];
 
   return (
-    <section id="about" className="py-6 sm:py-10 lg:py-12 transition-colors duration-300 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 section-shell rounded-[1.4rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
+    <section id="about" className="py-7 sm:py-11 lg:py-14 transition-colors duration-300 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[1.7rem] sm:rounded-[2.6rem] p-5 sm:p-7 lg:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 sm:gap-10 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -17,7 +17,7 @@ export default function AboutUs() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="aspect-[4/5] sm:aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/30 dark:ring-white/10">
+            <div className="aspect-[4/5] sm:aspect-[4/5] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/30 dark:ring-white/10 luxury-border">
               <img
                 src="/tamas.webp"
                 alt={language === "tr" ? "Geleneksel Üretim" : "Traditional Production"}
@@ -27,7 +27,7 @@ export default function AboutUs() {
               />
             </div>
             {/* Floating Experience Badge */}
-            <div className="absolute -bottom-8 -right-8 bg-brand-green text-white p-8 rounded-2xl shadow-xl hidden md:block border border-white/25">
+            <div className="absolute -bottom-6 -right-4 sm:-right-8 bg-brand-green text-white p-6 sm:p-8 rounded-2xl shadow-xl hidden md:block border border-white/25">
               <div className="text-4xl font-bold font-serif mb-1">30+</div>
               <div className="text-xs uppercase tracking-widest font-medium opacity-80">
                 {language === "tr" ? "Yıllık Tecrübe" : "Years Experience"}
@@ -44,7 +44,7 @@ export default function AboutUs() {
             <span className="text-brand-green dark:text-brand-green font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block">
               {t.about.title}
             </span>
-            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-5 sm:mb-8 leading-tight">
+            <h2 className="text-[2rem] sm:text-4xl md:text-[4.1rem] font-serif font-bold text-[color:var(--text-primary)] mb-5 sm:mb-8 leading-[0.95] text-balance">
               {language === "tr" 
                 ? "1994'ten Beri\nKaliteden Taviz Vermiyoruz"
                 : "Quality Never\nCompromised Since 1994"
@@ -71,8 +71,8 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 mt-7 sm:mt-12 border-t border-brand-brown/10 dark:border-white/10 pt-6 sm:pt-10">
-              <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-7 sm:mt-12 border-t border-brand-brown/10 dark:border-white/10 pt-6 sm:pt-10">
+              <div className="surface-card rounded-2xl p-4 sm:p-5">
                 <h4 className="font-serif text-xl font-bold text-[color:var(--text-primary)] mb-2 uppercase tracking-wide">
                   {language === "tr" ? "Doğal Üretim" : "Natural Production"}
                 </h4>
@@ -83,7 +83,7 @@ export default function AboutUs() {
                   }
                 </p>
               </div>
-              <div>
+              <div className="surface-card rounded-2xl p-4 sm:p-5">
                 <h4 className="font-serif text-xl font-bold text-[color:var(--text-primary)] mb-2 uppercase tracking-wide">
                   {language === "tr" ? "Kendi İmalatımız" : "Our Production"}
                 </h4>

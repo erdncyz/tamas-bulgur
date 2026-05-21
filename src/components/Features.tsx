@@ -39,13 +39,20 @@ export default function Features() {
   ];
 
   return (
-    <section className="py-6 sm:py-10 lg:py-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 section-shell rounded-[1.4rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
+    <section className="py-7 sm:py-11 lg:py-14 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[1.7rem] sm:rounded-[2.6rem] p-5 sm:p-7 lg:p-10">
         <div className="text-center mb-8 sm:mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="accent-tag mb-4"
+          >
+            {language === "tr" ? "Taahhüdümüz" : "Our Promise"}
+          </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-[2rem] sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-3 sm:mb-6"
+            className="text-[2rem] sm:text-4xl md:text-[4.1rem] font-serif font-bold text-[color:var(--text-primary)] mb-3 sm:mb-6"
           >
             {t.features.title}
           </motion.h2>
@@ -59,9 +66,9 @@ export default function Features() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="surface-card flex flex-col items-center text-center px-5 py-7 sm:px-8 sm:py-10 rounded-3xl border border-brand-brown/5 dark:border-white/10 hover:border-brand-green/40 dark:hover:border-brand-green/45 transition-all group hover:-translate-y-1"
+              className="surface-card luxury-border flex flex-col items-center text-center px-5 py-7 sm:px-8 sm:py-10 rounded-3xl border border-brand-brown/5 dark:border-white/10 hover:border-brand-green/40 dark:hover:border-brand-green/45 transition-all group hover:-translate-y-1.5"
             >
-              <div className="mb-4 sm:mb-6 text-brand-green dark:text-brand-green group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-4 sm:mb-6 text-brand-green dark:text-brand-green group-hover:scale-110 transition-transform duration-300 rounded-2xl bg-brand-green/10 p-4">
                 {feature.icon}
               </div>
               <h3 className="text-[1.1rem] sm:text-xl font-serif font-bold text-[color:var(--text-primary)] mb-2 sm:mb-3 uppercase tracking-tight">

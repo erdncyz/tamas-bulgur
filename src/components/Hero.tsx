@@ -95,7 +95,7 @@ export default function Hero() {
   }, [heroImages]);
 
   return (
-    <section className="relative min-h-[92svh] sm:min-h-screen flex items-center justify-center overflow-hidden pt-22 sm:pt-20 pb-16 sm:pb-10">
+    <section className="relative min-h-[95svh] sm:min-h-screen flex items-center justify-center overflow-hidden pt-26 sm:pt-24 pb-16 sm:pb-12">
       {/* Timed background slideshow */}
       <div className="absolute inset-0 z-0">
         {heroImages.map((image, index) => (
@@ -111,20 +111,21 @@ export default function Hero() {
             decoding="async"
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-brown/45 via-black/45 to-brand-brown/60 dark:from-black/60 dark:via-black/70 dark:to-black/75 backdrop-brightness-[0.72] dark:backdrop-brightness-[0.52]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2b2218]/45 via-black/40 to-[#20180f]/56 dark:from-black/58 dark:via-black/68 dark:to-black/76 backdrop-brightness-[0.76] dark:backdrop-brightness-[0.56]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(231,193,138,0.24),transparent_36%),radial-gradient(circle_at_80%_15%,rgba(132,160,106,0.22),transparent_30%)]" />
       </div>
 
       <div className="absolute inset-0 z-20 pointer-events-none hidden sm:block">
         <button
           onClick={goPrev}
-          className="pointer-events-auto absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/30 hover:bg-black/45 text-white transition-colors"
+          className="pointer-events-auto absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 p-2.5 sm:p-3.5 rounded-full bg-black/30 hover:bg-black/45 text-white transition-colors border border-white/30"
           aria-label={language === "tr" ? "Önceki görsel" : "Previous image"}
         >
           <ChevronLeft size={24} />
         </button>
         <button
           onClick={goNext}
-          className="pointer-events-auto absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/30 hover:bg-black/45 text-white transition-colors"
+          className="pointer-events-auto absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 p-2.5 sm:p-3.5 rounded-full bg-black/30 hover:bg-black/45 text-white transition-colors border border-white/30"
           aria-label={language === "tr" ? "Sonraki görsel" : "Next image"}
         >
           <ChevronRight size={24} />
@@ -136,14 +137,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="mx-auto w-full px-2 sm:px-6 py-4"
         >
-          <span className="inline-block text-brand-white/85 font-semibold tracking-[0.21em] sm:tracking-[0.3em] uppercase text-[11px] sm:text-sm mb-4">
+          <span className="inline-block text-white/88 font-semibold tracking-[0.21em] sm:tracking-[0.3em] uppercase text-[11px] sm:text-sm mb-4">
             {language === "tr" ? "Bereketli Toprakların Geleneksel Tadı" : "Traditional Taste from Fertile Lands"}
           </span>
-          <h1 className="text-[2.2rem] leading-[0.93] sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-5 sm:mb-6 tracking-tight drop-shadow-[0_12px_28px_rgba(0,0,0,0.45)]">
+          <h1 className="text-[2rem] leading-[0.92] sm:text-5xl md:text-6xl lg:text-[4.7rem] font-serif font-bold text-white mb-5 sm:mb-6 tracking-tight text-balance drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
             {language === "tr" ? "MALATYA TAŞ DEĞİRMEN BULGURU" : "MALATYA STONE MILL BULGUR"}
           </h1>
-          <p className="text-white/90 text-[0.98rem] sm:text-lg md:text-xl font-medium max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
+          <p className="text-white/90 text-[0.98rem] sm:text-lg md:text-xl font-medium max-w-3xl mx-auto mb-8 sm:mb-10 leading-relaxed">
             {language === "tr" 
               ? "1994'ten günümüze, atalarımızdan kalan taş değirmen usulüyle, en doğal ve en lezzetli bulgurları kendi imalatımızla sofralarınıza taşıyoruz."
               : "Since 1994, we have been bringing the most natural and delicious bulgur to your tables using traditional stone mill methods passed down from our ancestors."
@@ -155,7 +157,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#products"
-              className="bg-white text-brand-brown px-7 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-[0.17em] sm:tracking-[0.2em] text-[11px] sm:text-xs transition-all hover:shadow-2xl hover:shadow-black/30 w-full sm:w-auto border border-white/80"
+              className="bg-brand-green text-white px-7 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-[0.17em] sm:tracking-[0.2em] text-[11px] sm:text-xs transition-all hover:shadow-2xl hover:shadow-brand-green/30 w-full sm:w-auto border border-brand-green/70"
             >
               {language === "tr" ? "Ürünlerimizi Keşfedin" : "Discover Our Products"}
             </motion.a>
@@ -163,7 +165,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="border border-white/70 text-white px-7 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-[0.17em] sm:tracking-[0.2em] text-[11px] sm:text-xs hover:bg-white/15 transition-colors w-full sm:w-auto backdrop-blur-sm"
+              className="border border-white/55 text-white px-7 sm:px-10 py-3.5 sm:py-4 rounded-full font-bold uppercase tracking-[0.17em] sm:tracking-[0.2em] text-[11px] sm:text-xs hover:bg-white/16 transition-colors w-full sm:w-auto backdrop-blur-sm"
             >
               {language === "tr" ? "Bize Ulaşın" : "Get in Touch"}
             </motion.a>
@@ -176,7 +178,7 @@ export default function Hero() {
                 type="button"
                 onClick={() => setActiveImage(index)}
                 aria-label={language === "tr" ? `Görsel ${index + 1}` : `Image ${index + 1}`}
-                className={`h-1.5 rounded-full transition-all ${index === activeImage ? "w-6 bg-white" : "w-2 bg-white/50"}`}
+                className={`h-1.5 rounded-full transition-all ${index === activeImage ? "w-6 bg-brand-green" : "w-2 bg-brand-brown/35 dark:bg-white/45"}`}
               />
             ))}
           </div>
@@ -186,7 +188,7 @@ export default function Hero() {
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-5 sm:bottom-10 left-1/2 -translate-x-1/2 text-white/55"
+        className="absolute bottom-5 sm:bottom-10 left-1/2 -translate-x-1/2 text-white/70"
       >
         <ChevronDown size={28} />
       </motion.div>

@@ -60,7 +60,7 @@ function ProductCard({ product, index, onSelect }: ProductCardProps) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       onClick={onSelect}
-      className="group surface-card rounded-[1.6rem] sm:rounded-[2rem] p-3 sm:p-4 text-left w-[min(86vw,22rem)] sm:w-[20rem] md:w-[21rem] shrink-0 snap-start transition-all duration-300 hover:-translate-y-1"
+      className="group surface-card luxury-border rounded-[1.7rem] sm:rounded-[2rem] p-3 sm:p-4 text-left w-[min(86vw,22rem)] sm:w-[20rem] md:w-[21rem] shrink-0 snap-start transition-all duration-300 hover:-translate-y-1.5"
     >
       <div className="relative aspect-[4/5] sm:aspect-square overflow-hidden rounded-[1.5rem] mb-4 bg-gradient-to-br from-brand-cream to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <img
@@ -73,7 +73,7 @@ function ProductCard({ product, index, onSelect }: ProductCardProps) {
           fetchPriority={prioritizeImage ? "high" : "auto"}
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-brand-brown/30 dark:bg-black/35 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center">
+        <div className="absolute inset-0 bg-brand-brown/34 dark:bg-black/45 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center justify-center">
           <motion.div
             whileHover={{ scale: 1.1 }}
             className="bg-white/95 dark:bg-brand-green text-brand-brown dark:text-white p-3 rounded-full shadow-lg border border-white/70"
@@ -97,7 +97,7 @@ function ProductCard({ product, index, onSelect }: ProductCardProps) {
         )}
       </div>
       <div className="min-h-[3rem] mb-1.5">
-        <h3 className="text-[1.8rem] leading-[1.05] sm:text-[2.1rem] font-serif font-bold text-[color:var(--text-primary)] tracking-tight">
+        <h3 className="card-title text-[1.9rem] leading-[1.04] sm:text-[2.25rem] text-[color:var(--text-primary)]">
           {product.name}
         </h3>
       </div>
@@ -111,7 +111,7 @@ function ProductCard({ product, index, onSelect }: ProductCardProps) {
           </p>
         )}
       </div>
-      <p className="text-[0.95rem] sm:text-[1.05rem] leading-relaxed mb-4">
+      <p className="body-copy text-[0.99rem] sm:text-[1.06rem] mb-4">
         {product.description}
       </p>
       <div className="h-[1px] w-12 bg-brand-green group-hover:w-full transition-all duration-300" />
@@ -354,8 +354,8 @@ export default function Products() {
   }, [selectedProductId, language]);
 
   return (
-    <section id="products" className="py-6 sm:py-10 lg:py-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 section-shell rounded-[1.4rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
+    <section id="products" className="py-7 sm:py-11 lg:py-14 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[1.7rem] sm:rounded-[2.6rem] p-5 sm:p-7 lg:p-10">
         {selectedProduct ? (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -374,7 +374,7 @@ export default function Products() {
             </button>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
-              <div className="surface-card rounded-3xl p-2.5 sm:p-4">
+              <div className="surface-card luxury-border rounded-3xl p-2.5 sm:p-4">
                 <div className="aspect-auto h-full min-h-[21rem] sm:min-h-96 lg:min-h-[600px] rounded-2xl overflow-hidden relative group bg-gradient-to-br from-brand-cream to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
                   <img
                     src={selectedProduct.images ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
@@ -430,7 +430,7 @@ export default function Products() {
                   <span className="accent-tag mb-3">
                     {language === "tr" ? "Ürün Detayı" : "Product Details"}
                   </span>
-                  <h3 className="text-[2rem] sm:text-4xl font-serif font-bold text-[color:var(--text-primary)] mb-2 leading-tight">
+                  <h3 className="text-[2rem] sm:text-[3rem] font-serif font-bold text-[color:var(--text-primary)] mb-2 leading-[0.95]">
                     {selectedProduct.name}
                   </h3>
                   {selectedProduct.subtitle && (
@@ -444,7 +444,7 @@ export default function Products() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="surface-card rounded-2xl p-4">
+                  <div className="surface-card luxury-border rounded-2xl p-4">
                     <h4 className="font-serif font-bold text-xl text-[color:var(--text-primary)] mb-3">
                       {language === "tr" ? "Öne Çıkanlar" : "Highlights"}
                     </h4>
@@ -458,7 +458,7 @@ export default function Products() {
                     </ul>
                   </div>
 
-                  <div className="surface-card rounded-2xl p-4">
+                  <div className="surface-card luxury-border rounded-2xl p-4">
                     <h4 className="font-serif font-bold text-xl text-[color:var(--text-primary)] mb-3">
                       {language === "tr" ? "Kullanım Alanı" : "Usage"}
                     </h4>
@@ -474,7 +474,7 @@ export default function Products() {
                 </div>
 
                 {selectedProduct.imageLabels && (
-                  <div className="surface-card rounded-2xl p-4 sm:p-6">
+                  <div className="surface-card luxury-border rounded-2xl p-4 sm:p-6">
                     <h4 className="font-serif font-bold text-xl text-[color:var(--text-primary)] mb-3">
                       {language === "tr" ? "Yarma Çeşitleri" : "Cracked Wheat Types"}
                     </h4>
@@ -492,7 +492,7 @@ export default function Products() {
                 )}
 
                 {selectedProduct.nutritionFacts && (
-                  <div className="surface-card rounded-2xl p-4 sm:p-6">
+                  <div className="surface-card luxury-border rounded-2xl p-4 sm:p-6">
                     <h4 className="font-serif font-bold text-xl text-[color:var(--text-primary)] mb-4">
                       {language === "tr" ? "Besin Değerleri" : "Nutrition Facts"}
                     </h4>
@@ -536,7 +536,7 @@ export default function Products() {
                   </div>
                 )}
 
-                <div className="surface-card rounded-2xl p-4">
+                <div className="surface-card luxury-border rounded-2xl p-4">
                   <h4 className="font-serif font-bold text-xl text-[color:var(--text-primary)] mb-3">
                     {language === "tr" ? "Paket Seçenekleri" : "Package Options"}
                   </h4>
@@ -569,14 +569,14 @@ export default function Products() {
               <motion.span
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                className="text-brand-green dark:text-brand-green font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block"
+                className="eyebrow mb-3 sm:mb-4 block"
               >
                 {language === "tr" ? "Lezzet Yelpazemiz" : "Our Taste Range"}
               </motion.span>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="text-[2rem] sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-4 sm:mb-6"
+                className="section-title text-[2rem] sm:text-4xl md:text-[4.2rem] text-[color:var(--text-primary)] mb-4 sm:mb-6"
               >
                 {language === "tr" ? "Topraktan Sofranıza Gelen Şifa" : "Healing from Earth to Your Table"}
               </motion.h2>
@@ -584,7 +584,7 @@ export default function Products() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="max-w-2xl mx-auto text-[0.98rem] sm:text-lg"
+                className="body-lead max-w-2xl mx-auto"
               >
                 {language === "tr"
                   ? "Her biri özenle seçilmiş tahıllardan, hiçbir katkı maddesi eklenmeden üretilen doğal ürünlerimizi keşfedin."

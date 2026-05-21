@@ -5,12 +5,16 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-to-br from-brand-brown via-[#2f241c] to-[#241a13] dark:from-[#0c1218] dark:via-[#101922] dark:to-[#0b1117] text-white py-7 sm:py-12 px-3 sm:px-4 border-t border-white/10 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-5 sm:gap-8 text-center md:text-left">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-[#261d14] via-[#3a2c1f] to-[#1f1711] dark:from-[#171a1d] dark:via-[#1f2327] dark:to-[#131619] text-white py-8 sm:py-14 px-4 sm:px-6 border-t border-white/10 transition-colors duration-300">
+      <div className="pointer-events-none absolute inset-0 opacity-35">
+        <div className="absolute -top-12 -left-8 h-44 w-44 rounded-full bg-brand-green/35 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-amber-300/25 blur-3xl" />
+      </div>
+      <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-8 text-center md:text-left">
         <div className="space-y-4">
           <a
             href="#"
-            className="inline-flex bg-white/95 dark:bg-[#f2ede3] p-2 rounded-xl shadow-sm ring-1 ring-white/20"
+            className="inline-flex bg-white/95 dark:bg-[#f2ede3] p-2 rounded-2xl shadow-sm ring-1 ring-white/20"
             aria-label={language === "tr" ? "Ana sayfa" : "Home"}
           >
             <img
@@ -21,7 +25,7 @@ export default function Footer() {
               decoding="async"
             />
           </a>
-          <p className="text-white/65 dark:text-white/55 text-[13px] sm:text-sm max-w-xs mx-auto md:mx-0 transition-colors duration-300 leading-relaxed">
+          <p className="text-white/70 dark:text-white/60 text-[13px] sm:text-sm max-w-xs mx-auto md:mx-0 transition-colors duration-300 leading-relaxed">
             {language === "tr"
               ? "Malatya Yeşilyurt'tan sofralarınıza uzanan geleneksel taş değirmen lezzeti. 1994'ten beri."
               : "Traditional stone mill flavor from Malatya Yeşilyurt to your tables. Since 1994."
