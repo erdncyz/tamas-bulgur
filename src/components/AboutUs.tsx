@@ -7,9 +7,9 @@ export default function AboutUs() {
   const t = translations[language];
 
   return (
-    <section id="about" className="py-8 sm:py-10 lg:py-12 transition-colors duration-300 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <section id="about" className="py-6 sm:py-10 lg:py-12 transition-colors duration-300 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 section-shell rounded-[1.4rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 sm:gap-10 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -17,7 +17,7 @@ export default function AboutUs() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/30 dark:ring-white/10">
+            <div className="aspect-[4/5] sm:aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/30 dark:ring-white/10">
               <img
                 src="/tamas.webp"
                 alt={language === "tr" ? "Geleneksel Üretim" : "Traditional Production"}
@@ -41,16 +41,16 @@ export default function AboutUs() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-brand-green dark:text-brand-green font-semibold tracking-[0.2em] uppercase text-sm mb-4 block">
+            <span className="text-brand-green dark:text-brand-green font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block">
               {t.about.title}
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-6 sm:mb-8 leading-tight">
+            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-5 sm:mb-8 leading-tight">
               {language === "tr" 
                 ? "1994'ten Beri\nKaliteden Taviz Vermiyoruz"
                 : "Quality Never\nCompromised Since 1994"
               }
             </h2>
-            <div className="space-y-4 sm:space-y-6 leading-relaxed text-base sm:text-lg">
+            <div className="space-y-4 sm:space-y-6 leading-relaxed text-[0.98rem] sm:text-lg">
               <p>
                 {language === "tr"
                   ? "Tamaş Bulgur olarak Malatya'nın Yeşilyurt ilçesinde başlayan yolculuğumuzda, geleneksel tadı günümüz teknolojisiyle harmanlıyoruz."
@@ -71,7 +71,7 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-5 sm:gap-8 mt-8 sm:mt-12 border-t border-brand-brown/10 dark:border-white/10 pt-6 sm:pt-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 mt-7 sm:mt-12 border-t border-brand-brown/10 dark:border-white/10 pt-6 sm:pt-10">
               <div>
                 <h4 className="font-serif text-xl font-bold text-[color:var(--text-primary)] mb-2 uppercase tracking-wide">
                   {language === "tr" ? "Doğal Üretim" : "Natural Production"}

@@ -4,15 +4,47 @@ import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../contexts";
 import { translations } from "../contexts/translations";
 
-function ProductCard({ product, index, onSelect }) {
+type Product = {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  images?: string[];
+  imagePosition?: string;
+  subtitle?: string;
+  imageLabels?: string[];
+  longDescription: string;
+  features: string[];
+  usage: string[];
+  packageOptions: string[];
+  nutritionFacts?: {
+    serving: string;
+    energy: { kcal: number; kj: number };
+    fat: number;
+    saturatedFat: number;
+    carbohydrates: number;
+    sugars: number;
+    protein: number;
+    salt: number;
+  };
+};
+
+type ProductCardProps = {
+  product: Product;
+  index: number;
+  onSelect: () => void;
+};
+
+function ProductCard({ product, index, onSelect }: ProductCardProps) {
   const [imageIndex, setImageIndex] = useState(0);
   const prioritizeImage = index < 2;
 
   useEffect(() => {
-    if (!product.images || product.images.length <= 1) return;
+    const images = product.images;
+    if (!images || images.length <= 1) return;
 
     const interval = setInterval(() => {
-      setImageIndex((prev) => (prev + 1) % product.images.length);
+      setImageIndex((prev) => (prev + 1) % images.length);
     }, 2000);
 
     return () => clearInterval(interval);
@@ -28,7 +60,7 @@ function ProductCard({ product, index, onSelect }) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       onClick={onSelect}
-      className="group surface-card rounded-[2rem] p-3 sm:p-4 text-left w-[min(84vw,22rem)] sm:w-[20rem] md:w-[21rem] shrink-0 snap-start transition-all duration-300 hover:-translate-y-1"
+      className="group surface-card rounded-[1.6rem] sm:rounded-[2rem] p-3 sm:p-4 text-left w-[min(86vw,22rem)] sm:w-[20rem] md:w-[21rem] shrink-0 snap-start transition-all duration-300 hover:-translate-y-1"
     >
       <div className="relative aspect-[4/5] sm:aspect-square overflow-hidden rounded-[1.5rem] mb-4 bg-gradient-to-br from-brand-cream to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <img
@@ -51,7 +83,7 @@ function ProductCard({ product, index, onSelect }) {
         </div>
         {product.images && product.images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
-            {product.images.map((_, idx) => (
+            {product.images.map((_: string, idx: number) => (
               <div
                 key={idx}
                 className={`h-1 rounded-full transition-all ${
@@ -65,7 +97,7 @@ function ProductCard({ product, index, onSelect }) {
         )}
       </div>
       <div className="min-h-[3rem] mb-1.5">
-        <h3 className="text-[2rem] leading-[1.05] sm:text-[2.1rem] font-serif font-bold text-[color:var(--text-primary)] tracking-tight">
+        <h3 className="text-[1.8rem] leading-[1.05] sm:text-[2.1rem] font-serif font-bold text-[color:var(--text-primary)] tracking-tight">
           {product.name}
         </h3>
       </div>
@@ -79,7 +111,7 @@ function ProductCard({ product, index, onSelect }) {
           </p>
         )}
       </div>
-      <p className="text-sm sm:text-[1.05rem] leading-relaxed mb-4">
+      <p className="text-[0.95rem] sm:text-[1.05rem] leading-relaxed mb-4">
         {product.description}
       </p>
       <div className="h-[1px] w-12 bg-brand-green group-hover:w-full transition-all duration-300" />
@@ -322,8 +354,8 @@ export default function Products() {
   }, [selectedProductId, language]);
 
   return (
-    <section id="products" className="py-8 sm:py-10 lg:py-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 section-shell rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
+    <section id="products" className="py-6 sm:py-10 lg:py-12 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 section-shell rounded-[1.4rem] sm:rounded-[2.5rem] p-4 sm:p-6 lg:p-8">
         {selectedProduct ? (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -342,8 +374,8 @@ export default function Products() {
             </button>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
-              <div className="surface-card rounded-3xl p-3 sm:p-4">
-                <div className="aspect-auto h-full min-h-96 lg:min-h-[600px] rounded-2xl overflow-hidden relative group bg-gradient-to-br from-brand-cream to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+              <div className="surface-card rounded-3xl p-2.5 sm:p-4">
+                <div className="aspect-auto h-full min-h-[21rem] sm:min-h-96 lg:min-h-[600px] rounded-2xl overflow-hidden relative group bg-gradient-to-br from-brand-cream to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
                   <img
                     src={selectedProduct.images ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
                     alt={selectedProduct.name}
@@ -358,13 +390,13 @@ export default function Products() {
                     <>
                       <button
                         onClick={() => setCurrentImageIndex((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length)}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg hover:bg-white dark:hover:bg-black"
+                        className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-black/50 p-2 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-lg hover:bg-white dark:hover:bg-black"
                       >
                         <ArrowLeft size={20} className="text-brand-brown dark:text-white" />
                       </button>
                       <button
                         onClick={() => setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-black/50 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-lg hover:bg-white dark:hover:bg-black"
+                        className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 dark:bg-black/50 p-2 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-lg hover:bg-white dark:hover:bg-black"
                       >
                         <ArrowRight size={20} className="text-brand-brown dark:text-white" />
                       </button>
@@ -398,7 +430,7 @@ export default function Products() {
                   <span className="accent-tag mb-3">
                     {language === "tr" ? "Ürün Detayı" : "Product Details"}
                   </span>
-                  <h3 className="text-3xl sm:text-4xl font-serif font-bold text-[color:var(--text-primary)] mb-2">
+                  <h3 className="text-[2rem] sm:text-4xl font-serif font-bold text-[color:var(--text-primary)] mb-2 leading-tight">
                     {selectedProduct.name}
                   </h3>
                   {selectedProduct.subtitle && (
@@ -533,18 +565,18 @@ export default function Products() {
           </motion.div>
         ) : (
           <>
-            <div className="text-center mb-10 sm:mb-16">
+            <div className="text-center mb-8 sm:mb-16">
               <motion.span
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                className="text-brand-green dark:text-brand-green font-semibold tracking-[0.2em] uppercase text-sm mb-4 block"
+                className="text-brand-green dark:text-brand-green font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 block"
               >
                 {language === "tr" ? "Lezzet Yelpazemiz" : "Our Taste Range"}
               </motion.span>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="text-3xl sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-6"
+                className="text-[2rem] sm:text-4xl md:text-6xl font-serif font-bold text-[color:var(--text-primary)] mb-4 sm:mb-6"
               >
                 {language === "tr" ? "Topraktan Sofranıza Gelen Şifa" : "Healing from Earth to Your Table"}
               </motion.h2>
@@ -552,7 +584,7 @@ export default function Products() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="max-w-2xl mx-auto text-base sm:text-lg"
+                className="max-w-2xl mx-auto text-[0.98rem] sm:text-lg"
               >
                 {language === "tr"
                   ? "Her biri özenle seçilmiş tahıllardan, hiçbir katkı maddesi eklenmeden üretilen doğal ürünlerimizi keşfedin."
@@ -575,7 +607,7 @@ export default function Products() {
 
                 <div
                   ref={productsScrollerRef}
-                  className="overflow-x-auto overflow-y-hidden px-4 sm:px-6 lg:px-4 pb-3 sm:pb-4 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                  className="overflow-x-auto overflow-y-hidden px-1 sm:px-6 lg:px-4 pb-3 sm:pb-4 touch-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                 >
                   <div className={`flex gap-4 sm:gap-6 ${!canScrollLeft && !canScrollRight ? "justify-center" : ""}`}>
                   {sortedProducts.map((product, index) => (

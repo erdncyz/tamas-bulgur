@@ -23,13 +23,13 @@ function SectionBanner({
   imageClassName?: string;
 }) {
   return (
-    <section className="py-3 sm:py-4 lg:py-5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-2 sm:py-4 lg:py-5">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="surface-card relative rounded-3xl overflow-hidden p-2 sm:p-3">
           <img
             src={src}
             alt={alt}
-            className={`w-full h-32 sm:h-40 lg:h-48 object-cover rounded-2xl ${imageClassName ?? "object-center"}`}
+            className={`w-full h-28 sm:h-40 lg:h-48 object-cover rounded-2xl ${imageClassName ?? "object-center"}`}
             loading="lazy"
             decoding="async"
           />
@@ -73,14 +73,14 @@ function AppContent() {
           alt="Tamaş Bulgur banner görseli 2"
           imageClassName="object-[60%_74%] scale-[1.08]"
         />
-        <div className="h-6 sm:h-8 lg:h-10" />
+        <div className="h-4 sm:h-8 lg:h-10" />
         <Products />
         <SectionBanner
           src="/banner3.webp"
           alt="Tamaş Bulgur banner görseli 3"
           imageClassName="object-[50%_46%]"
         />
-        <div className="h-6 sm:h-8 lg:h-10" />
+        <div className="h-4 sm:h-8 lg:h-10" />
         <Contact />
       </main>
       <Footer />

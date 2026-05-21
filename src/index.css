@@ -61,6 +61,7 @@
       linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 46%, var(--bg-secondary) 100%);
     color: var(--text-primary);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   body::before {
@@ -98,6 +99,7 @@
     border: 1px solid var(--line);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(8px);
+    border-radius: 1.75rem;
   }
 
   .surface-card {
@@ -110,6 +112,17 @@
     @apply inline-flex items-center rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em];
     background: var(--accent-soft);
     color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .section-shell {
+      border-radius: 1.25rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .surface-card {
+      box-shadow: 0 16px 36px rgba(74, 52, 35, 0.13);
+    }
   }
 }
 

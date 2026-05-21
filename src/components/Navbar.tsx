@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Menu, X, Phone, Instagram, Sun, Moon } from "lucide-react";
+import { Menu, X, Phone, Instagram, Sun, Moon, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTheme, useLanguage } from "../contexts";
 import { translations } from "../contexts/translations";
@@ -63,7 +63,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav 
+    <nav
       className="fixed w-full z-50 transition-all duration-500"
       style={{
         backgroundColor: isSolid
@@ -75,8 +75,8 @@ export default function Navbar() {
         backdropFilter: isSolid ? "blur(20px)" : "blur(4px)"
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-20 items-center">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-18 sm:h-20 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -90,7 +90,7 @@ export default function Navbar() {
               <img
                 src="/logo.webp"
                 alt={language === "tr" ? "Tamaş Bulgur logosu" : "Tamaş Bulgur logo"}
-                className="h-12 sm:h-14 w-auto object-contain"
+                className="h-11 sm:h-14 w-auto object-contain"
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
@@ -199,6 +199,7 @@ export default function Navbar() {
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={language === "tr" ? "Menüyü aç" : "Open menu"}
               className={`p-2 rounded-full border ${
                 isSolid
                   ? "text-brand-brown dark:text-brand-green border-brand-brown/20 dark:border-white/20"
@@ -216,14 +217,14 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-brand-white/95 dark:bg-[#152131]/95 border-b border-brand-brown/10 dark:border-white/10 px-4 pt-2 pb-6 space-y-2 transition-colors duration-300"
+          className="md:hidden bg-brand-white/95 dark:bg-[#152131]/95 border-b border-brand-brown/10 dark:border-white/10 px-3 pt-3 pb-6 space-y-2 transition-colors duration-300"
         >
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block px-3 py-4 text-base font-semibold text-[color:var(--text-secondary)] dark:text-gray-200 hover:bg-brand-cream/70 dark:hover:bg-white/10 rounded-xl uppercase tracking-[0.16em] transition-colors duration-300"
+              className="block px-3 py-3.5 text-[15px] font-semibold text-[color:var(--text-secondary)] dark:text-gray-200 hover:bg-brand-cream/70 dark:hover:bg-white/10 rounded-xl uppercase tracking-[0.14em] transition-colors duration-300"
             >
               {link.name}
             </a>
@@ -264,6 +265,14 @@ export default function Navbar() {
               <Instagram size={24} />
             </a>
           </div>
+          <a
+            href="#contact"
+            onClick={() => setIsOpen(false)}
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-green px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-brand-green/30"
+          >
+            {language === "tr" ? "Teklif Al" : "Get a Quote"}
+            <ArrowUpRight size={16} />
+          </a>
         </motion.div>
       )}
     </nav>
