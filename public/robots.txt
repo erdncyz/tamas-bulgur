@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xn--tamabulgur-h9b.com/sitemap.xml
+Sitemap: https://tamaşbulgur.com/sitemap.xml
