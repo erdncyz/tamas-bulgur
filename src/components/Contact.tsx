@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Phone, Mail, MapPin, Instagram } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import { useLanguage } from "../contexts";
 import { translations } from "../contexts/translations";
 
@@ -7,6 +8,7 @@ export default function Contact() {
   const { language } = useLanguage();
   const t = translations[language];
   const mapsUrl = "https://www.google.com/maps/search/?api=1&query=%C3%96zsan+Sanayi+Sitesi+36.+Blok+No:+22+Ye%C5%9Filyurt+Malatya";
+  const websiteUrl = "https://tamaşbulgur.com";
 
   return (
     <section id="contact" className="py-7 sm:py-11 lg:py-14 transition-colors duration-300">
@@ -101,6 +103,34 @@ export default function Contact() {
                   </p>
                 </div>
               </a>
+
+              <div className="mt-5 sm:mt-7 surface-card luxury-border p-4 sm:p-5 rounded-2xl border border-brand-brown/10 dark:border-white/10">
+                <p className="font-serif font-bold text-lg text-[color:var(--text-primary)] uppercase tracking-wide mb-1">
+                  {language === "tr" ? "Web Sitemiz İçin QR Kod" : "QR Code for Our Website"}
+                </p>
+                <p className="text-sm text-[color:var(--text-secondary)] mb-4">
+                  {language === "tr"
+                    ? "Kameranızla okutun, tamaşbulgur.com açılsın."
+                    : "Scan with your camera to open tamaşbulgur.com."
+                  }
+                </p>
+                <a
+                  href={websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-2xl p-3 bg-white dark:bg-white shadow-sm ring-1 ring-black/5"
+                  aria-label={language === "tr" ? "Tamaş Bulgur web sitesi QR kodu" : "Tamaş Bulgur website QR code"}
+                >
+                  <QRCodeSVG
+                    value={websiteUrl}
+                    size={168}
+                    level="H"
+                    includeMargin={true}
+                    bgColor="#ffffff"
+                    fgColor="#111111"
+                  />
+                </a>
+              </div>
             </div>
           </motion.div>
 
